@@ -16,11 +16,13 @@ const coreVotingContract = CoreVoting__factory.connect(
  * A mapping of localhost CoreVoting Proposal IDs -> random Snapshot proposal
  * ids from Element Finance.  This is how we show titles/descriptions for
  * testnet proposals in dev.
+ *
+ * Note: Sometimes the snapshot proposal ids are IPFS strings or hex strings 🤷
  */
 const snapshotIdsByProposalId: Record<string, string> = {
   "0": "QmZSURBMfMh2qSTPSSjjaL2qPdqTMJsfpkvwxuKe72bH3y",
-  "1": "QmdGhH9NGUA5jtUxTxXZp2DiNtgSt2bXh1BdZPAHNPiPTw",
-  "2": "QmbCH8W3cBXeji8fzcCavmzSBLAaUZR5Lm615rbGQYya1D",
+  "1": "0x46b4c3dbdb4b8b84fe42660ac5b5a41b9026c472c22e8a8d4a76ba71bf3dd825",
+  "2": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932",
 };
 
 getProposals("dist/testnet.proposals.json")
