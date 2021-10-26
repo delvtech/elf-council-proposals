@@ -3,6 +3,7 @@ import fs from "fs";
 import { AddressesJsonFile } from "src/addresses/AddressesJsonFile";
 import { Proposal, ProposalsJson } from "src/types";
 import { CoreVoting__factory } from "elf-council-typechain";
+import { SNAPSHOT_SPACE_ID } from "src/snapshot";
 
 const provider = hre.ethers.provider;
 const addressesJson: AddressesJsonFile = require(`src/addresses/testnet.addresses.json`);
@@ -12,29 +13,14 @@ const coreVotingContract = CoreVoting__factory.connect(
 );
 
 /**
- * For testnet just use a snapshot space w/ enough proposals populating it, ie:
- * Yam Finance
- */
-const snapshotSpace = "yam.eth";
-
-/**
- * A mapping of localhost CoreVoting Proposal IDs -> random Snapshot proposal ids from Yam.
- * This is how we show titles/descriptions for testnet proposals in dev.
+ * A mapping of localhost CoreVoting Proposal IDs -> random Snapshot proposal
+ * ids from Element Finance.  This is how we show titles/descriptions for
+ * testnet proposals in dev.
  */
 const snapshotIdsByProposalId: Record<string, string> = {
-  "0": "QmZTGLiixG5Z28AuhDuVxkCBePpn4nrmoMargqcC8Mk7xw",
-  "1": "QmPxMCuejEg9g3avMpbDwQjjo3ihEqeCMU3mMsHLyiauKE",
-  "2": "QmSYrh4QD3iCgyGTFSMr2meRJddvBdhf9xtDbRH3y6w29A",
-  "3": "QmTH6QZnNxrRGhMxyEbwiE7VFPCTz1TYGnDHRJghnvgMR9",
-  "4": "QmeyKkjuqbfyrJfWVFJw6STLxd1EZcMVfTNfYepPT1poUG",
-  "5": "QmT5o98bCNocPT5mHF6ApUFr1577HMtR84DnimM2xP2Z4P",
-  "6": "QmdU2Xq6C4Ljrqm37Qz2pGzSKwESwDhohR3yYrDth28h5P",
-  "7": "Qmagqp9z59D36dt22HX8sk6SdW21nNkBpLRsu7H38hgs65",
-  "8": "QmNQBdxkjK5WCFUAKViXWT6utTDXXMYCQ2WU9BdoubdrNH",
-  "9": "QmcmbqctnhMCaRHEBAAvz4jTk98bMV7ft6nozpv9tizpox",
-  "10": "QmRwUZdc4B7qP9Kfp7GtggRVunoydMVzqLaLkM6qc58ZXr",
-  "11": "QmZjCqA5581cBrys7T2Du8CN2R1FoKJbRP4J9rs7jcGaWu",
-  "12": "QmYa5RuQNAFqNq3DuBv1G24izWB9LomKZE3Pq2DvAeb7db",
+  "0": "QmZSURBMfMh2qSTPSSjjaL2qPdqTMJsfpkvwxuKe72bH3y",
+  "1": "QmdGhH9NGUA5jtUxTxXZp2DiNtgSt2bXh1BdZPAHNPiPTw",
+  "2": "QmbCH8W3cBXeji8fzcCavmzSBLAaUZR5Lm615rbGQYya1D",
 };
 
 getProposals("dist/testnet.proposals.json")
@@ -59,6 +45,12 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
         const { unlock, expiration, proposalHash, lastCall, quorum } =
           await coreVotingContract.functions.proposals(proposalId);
 
+        const snapshotId =
+          snapshotIdsByProposalId[proposalIdNumber] ||
+          // Temporary: default to the first one if more proposals exist
+          // on-chain than are in the snapshot space,
+          snapshotIdsByProposalId[0];
+
         return {
           proposalId: proposalIdNumber,
           proposalHash: proposalHash,
@@ -67,7 +59,7 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
           created: createdBlock.timestamp,
           expiration: expiration.toNumber(),
           quorum: quorum.toNumber(),
-          snapshotId: snapshotIdsByProposalId[proposalIdNumber],
+          snapshotId: snapshotId,
         };
       }
     )
@@ -75,7 +67,7 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
 
   const proposalsJson: ProposalsJson = {
     version: "0.0.0",
-    snapshotSpace,
+    snapshotSpace: SNAPSHOT_SPACE_ID,
     proposals,
   };
 

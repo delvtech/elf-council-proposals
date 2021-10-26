@@ -43,7 +43,7 @@
   "scripts": {
     "update-elf-council-typechain": "npm install git+https://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:x-oauth-basic@github.com/element-fi/elf-council-typechain.git",
     "_fetch-testnet-addresses-json": "bash scripts/testnet-addresses.sh",
-    "build-testnet": "npm run _fetch-testnet-addresses-json && bash scripts/build-testnet.sh mainnet",
+    "build-testnet": "npm run _fetch-testnet-addresses-json && bash scripts/build-testnet.sh && npm run _build-index && npm run _copy-files",
     "_build-index": "bash scripts/build-index.sh",
     "_copy-files": "bash scripts/copy-dist-files.sh"
   }

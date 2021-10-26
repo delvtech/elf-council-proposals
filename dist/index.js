@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.testnetProposals = void 0;
 exports.testnetProposals = {
     "version": "0.0.0",
-    "snapshotSpace": "yam.eth",
+    "snapshotSpace": "element-finance.eth",
     "proposals": [
         {
             "proposalId": 0,
@@ -28,7 +28,7 @@ exports.testnetProposals = {
             "created": 1613286486,
             "expiration": 11905367,
             "quorum": 1,
-            "snapshotId": "QmZTGLiixG5Z28AuhDuVxkCBePpn4nrmoMargqcC8Mk7xw"
+            "snapshotId": "QmZSURBMfMh2qSTPSSjjaL2qPdqTMJsfpkvwxuKe72bH3y"
         },
         {
             "proposalId": 1,
@@ -38,7 +38,7 @@ exports.testnetProposals = {
             "created": 1613286512,
             "expiration": 11905371,
             "quorum": 1,
-            "snapshotId": "QmPxMCuejEg9g3avMpbDwQjjo3ihEqeCMU3mMsHLyiauKE"
+            "snapshotId": "QmdGhH9NGUA5jtUxTxXZp2DiNtgSt2bXh1BdZPAHNPiPTw"
         }
     ]
 };
