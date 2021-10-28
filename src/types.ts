@@ -8,15 +8,15 @@ export interface Proposal {
    */
   created: number;
   /**
-   * Block number
+   * Block number for last vote
    */
   expiration: number;
   /**
-   * Block number
+   * Block number for start of execution period
    */
   unlock: number;
   /**
-   * Block number
+   * Block number for end of execution period
    */
   lastCall: number;
   quorum: number;
