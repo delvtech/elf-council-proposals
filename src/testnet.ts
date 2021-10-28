@@ -25,6 +25,24 @@ const snapshotIdsByProposalId: Record<string, string> = {
   "2": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932",
 };
 
+const targetsByProposalId: Record<string, string[]> = {
+  "0": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
+  "1": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
+  "2": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
+};
+
+const callDatasByProposalId: Record<string, string[]> = {
+  "0": [
+    "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a",
+  ],
+  "1": [
+    "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a",
+  ],
+  "2": [
+    "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a",
+  ],
+};
+
 getProposals("dist/testnet.proposals.json")
   .then(() => process.exit(0))
   .catch((error) => {
@@ -40,27 +58,36 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
 
   const proposals: Proposal[] = await Promise.all(
     proposalCreatedEvents.map(
-      async ({ args, args: { proposalId, created } }): Promise<Proposal> => {
-        const proposalIdNumber = proposalId.toNumber();
+      async ({
+        args,
+        args: { proposalId: proposalIdBN, created },
+      }): Promise<Proposal> => {
+        const proposalId = proposalIdBN.toString();
         const createdBlock = await provider.getBlock(created.toNumber());
 
         const { unlock, expiration, proposalHash, lastCall, quorum } =
-          await coreVotingContract.functions.proposals(proposalId);
+          await coreVotingContract.functions.proposals(proposalIdBN);
 
         const snapshotId =
-          snapshotIdsByProposalId[proposalIdNumber] ||
+          snapshotIdsByProposalId[proposalId] ||
           // Temporary: default to the first one if more proposals exist
           // on-chain than are in the snapshot space,
           snapshotIdsByProposalId[0];
 
+        const targets = targetsByProposalId[proposalId];
+        const calldatas = callDatasByProposalId[proposalId];
+
         return {
-          proposalId: proposalIdNumber,
+          proposalId,
           proposalHash: proposalHash,
           unlock: unlock.toNumber(),
           lastCall: lastCall.toNumber(),
-          created: createdBlock.timestamp,
+          created: createdBlock.number,
+          createdTimestamp: createdBlock.timestamp,
           expiration: expiration.toNumber(),
           quorum: quorum.toNumber(),
+          targets,
+          calldatas,
           snapshotId: snapshotId,
         };
       }
