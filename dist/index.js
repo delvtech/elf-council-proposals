@@ -22,13 +22,13 @@ exports.testnetProposals = {
     "proposals": [
         {
             "proposalId": "0",
-            "proposalHash": "0x1f33b0550b8cea797c06e3cbe131b0cd810dbe3c33e5d35dbe49e730307aa339",
-            "unlock": 11872887,
-            "lastCall": 11911862,
-            "created": 11853399,
-            "createdTimestamp": 1613286420,
-            "expiration": 11905367,
-            "quorum": 1,
+            "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
+            "unlock": 11853416,
+            "lastCall": 11911869,
+            "created": 11853406,
+            "createdTimestamp": 1613292909,
+            "expiration": 11853431,
+            "quorum": 50,
             "targets": [
                 "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"
             ],
@@ -39,13 +39,13 @@ exports.testnetProposals = {
         },
         {
             "proposalId": "1",
-            "proposalHash": "0x1f33b0550b8cea797c06e3cbe131b0cd810dbe3c33e5d35dbe49e730307aa339",
-            "unlock": 11872896,
-            "lastCall": 11911871,
-            "created": 11853408,
-            "createdTimestamp": 1613392500,
-            "expiration": 11905376,
-            "quorum": 1,
+            "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
+            "unlock": 11853420,
+            "lastCall": 11911873,
+            "created": 11853410,
+            "createdTimestamp": 1613292927,
+            "expiration": 11853435,
+            "quorum": 50,
             "targets": [
                 "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"
             ],
@@ -53,6 +53,23 @@ exports.testnetProposals = {
                 "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a"
             ],
             "snapshotId": "0x46b4c3dbdb4b8b84fe42660ac5b5a41b9026c472c22e8a8d4a76ba71bf3dd825"
+        },
+        {
+            "proposalId": "2",
+            "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
+            "unlock": 11853424,
+            "lastCall": 11911877,
+            "created": 11853414,
+            "createdTimestamp": 1613292938,
+            "expiration": 11853439,
+            "quorum": 50,
+            "targets": [
+                "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"
+            ],
+            "calldatas": [
+                "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a"
+            ],
+            "snapshotId": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932"
         }
     ]
 };
