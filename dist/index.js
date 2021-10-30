@@ -23,11 +23,11 @@ exports.testnetProposals = {
         {
             "proposalId": "0",
             "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
-            "unlock": 11853416,
-            "lastCall": 11911869,
-            "created": 11853406,
-            "createdTimestamp": 1613292909,
-            "expiration": 11853431,
+            "unlock": 11853420,
+            "lastCall": 11911873,
+            "created": 11853410,
+            "createdTimestamp": 1613288669,
+            "expiration": 11853435,
             "quorum": 50,
             "targets": [
                 "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"
@@ -40,11 +40,11 @@ exports.testnetProposals = {
         {
             "proposalId": "1",
             "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
-            "unlock": 11853420,
-            "lastCall": 11911873,
-            "created": 11853410,
-            "createdTimestamp": 1613292927,
-            "expiration": 11853435,
+            "unlock": 11853424,
+            "lastCall": 11911877,
+            "created": 11853414,
+            "createdTimestamp": 1613288686,
+            "expiration": 11853439,
             "quorum": 50,
             "targets": [
                 "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"
@@ -57,11 +57,11 @@ exports.testnetProposals = {
         {
             "proposalId": "2",
             "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
-            "unlock": 11853424,
-            "lastCall": 11911877,
-            "created": 11853414,
-            "createdTimestamp": 1613292938,
-            "expiration": 11853439,
+            "unlock": 11853428,
+            "lastCall": 11911881,
+            "created": 11853418,
+            "createdTimestamp": 1613288697,
+            "expiration": 11853443,
             "quorum": 50,
             "targets": [
                 "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"
