@@ -1,8 +1,10 @@
-import hre, { ethers } from "hardhat";
-import fs from "fs";
-import { AddressesJsonFile } from "src/addresses/AddressesJsonFile";
-import { Proposal, ProposalsJson } from "src/types";
+import { AddressesJsonFile } from "elf-council-tokenlist";
 import { CoreVoting__factory } from "elf-council-typechain";
+import fs from "fs";
+import hre from "hardhat";
+
+import { Proposal, ProposalsJson } from "src/types";
+
 import { SNAPSHOT_SPACE_ID } from "src/snapshot";
 
 const provider = hre.ethers.provider;
@@ -23,12 +25,16 @@ const snapshotIdsByProposalId: Record<string, string> = {
   "0": "QmZSURBMfMh2qSTPSSjjaL2qPdqTMJsfpkvwxuKe72bH3y",
   "1": "0x46b4c3dbdb4b8b84fe42660ac5b5a41b9026c472c22e8a8d4a76ba71bf3dd825",
   "2": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932",
+  "3": "QmTDsZGG8r5Q2NEeXVTKsAPiTQ9Lrdcy8XfhAA9TA5K1tP",
+  "4": "QmYQNNPLRKzner2J2RyFb51ch4BHDQkRfT5EVCFtX1qvdc",
 };
 
 const targetsByProposalId: Record<string, string[]> = {
   "0": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
   "1": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
   "2": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
+  "3": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
+  "4": ["0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"],
 };
 
 const callDatasByProposalId: Record<string, string[]> = {
@@ -39,6 +45,12 @@ const callDatasByProposalId: Record<string, string[]> = {
     "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a",
   ],
   "2": [
+    "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a",
+  ],
+  "3": [
+    "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a",
+  ],
+  "4": [
     "0x88b49b834dbdd3e053743c5483a6f5f453200c2c9201e1330e5e5f99997aafcbe4389a2a",
   ],
 };
