@@ -1,5 +1,6 @@
 import { AddressesJsonFile } from "elf-council-tokenlist";
 import { CoreVoting__factory } from "elf-council-typechain";
+import { formatEther } from "ethers/lib/utils";
 import fs from "fs";
 import hre from "hardhat";
 
@@ -25,8 +26,8 @@ const snapshotIdsByProposalId: Record<string, string> = {
   "0": "QmZSURBMfMh2qSTPSSjjaL2qPdqTMJsfpkvwxuKe72bH3y",
   "1": "0x46b4c3dbdb4b8b84fe42660ac5b5a41b9026c472c22e8a8d4a76ba71bf3dd825",
   "2": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932",
-  "3": "QmTDsZGG8r5Q2NEeXVTKsAPiTQ9Lrdcy8XfhAA9TA5K1tP",
-  "4": "QmYQNNPLRKzner2J2RyFb51ch4BHDQkRfT5EVCFtX1qvdc",
+  "3": "0x7c0bea7eb9340c9bbfcce5ba6b9ca3cbf46e214a7a8f113ab27472378a77aff5",
+  "4": "0x45bdb2351a21da73162ba018a7b448231945b7754abec0ecdc66c3778e9e7720",
 };
 
 const targetsByProposalId: Record<string, string[]> = {
@@ -97,7 +98,7 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
           created: createdBlock.number,
           createdTimestamp: createdBlock.timestamp,
           expiration: expiration.toNumber(),
-          quorum: quorum.toNumber(),
+          quorum: formatEther(quorum),
           targets,
           calldatas,
           snapshotId: snapshotId,
