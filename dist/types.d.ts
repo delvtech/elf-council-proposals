@@ -29,9 +29,9 @@ export interface Proposal {
      */
     lastCall: number;
     /**
-     * minimum vote power to pass or reject a proposal
+     * minimum vote power to pass or reject a proposal in 1e18 format
      */
-    quorum: number;
+    quorum: string;
     /**
      * list of addresses the Timelock contract will call when executing a proposal
      */
