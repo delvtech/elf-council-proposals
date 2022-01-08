@@ -1,7 +1,8 @@
 TESTNET_PROPOSALS_JSON=`cat dist/testnet.proposals.json`
+GOERLI_PROPOSALS_JSON=`cat src/proposals/goerli.proposals.json`
 
 echo "
-/** 
+/**
  * 🚨🚨🚨 THIS FILE IS AUTO-GENERATED. DO NOT EDIT MANUALLY. 🚨🚨🚨
  * 🚨🚨🚨 THIS FILE IS AUTO-GENERATED. DO NOT EDIT MANUALLY. 🚨🚨🚨
  * 🚨🚨🚨 THIS FILE IS AUTO-GENERATED. DO NOT EDIT MANUALLY. 🚨🚨🚨
@@ -20,6 +21,7 @@ echo "
 import { ProposalsJson } from './types';
 
 export const testnetProposals: ProposalsJson = $TESTNET_PROPOSALS_JSON;
+export const goerliProposals: ProposalsJson = $GOERLI_PROPOSALS_JSON;
 " > src/index.ts
 
 tsc --project tsconfig.json
