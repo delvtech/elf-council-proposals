@@ -161,6 +161,23 @@ exports.goerliProposals = {
                 "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
             ],
             "unlock": 6161623
+        },
+        {
+            "proposalId": "3",
+            "proposalHash": "0xbf35f67e89743d095cae3e2391c43e6fbddf27ff73e005821b669baa314ba8ae",
+            "unlock": 6184449,
+            "lastCall": 7164959,
+            "created": 6164961,
+            "createdTimestamp": 1641651129,
+            "expiration": 6216929,
+            "quorum": "1000000.0",
+            "targets": [
+                "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
+            ],
+            "calldatas": [
+                "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea"
+            ],
+            "snapshotId": "0x7c0bea7eb9340c9bbfcce5ba6b9ca3cbf46e214a7a8f113ab27472378a77aff5"
         }
     ]
 };
