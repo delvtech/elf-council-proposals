@@ -39,7 +39,7 @@ const targetsByProposalId: Record<string, string[]> = {
   "0": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
   "1": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
   "2": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
-  "3": [""],
+  "3": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
   "4": [""],
 };
 
@@ -53,7 +53,9 @@ const callDatasByProposalId: Record<string, string[]> = {
   "2": [
     "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea",
   ],
-  "3": [""],
+  "3": [
+    "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea",
+  ],
   "4": [""],
 };
 
