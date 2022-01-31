@@ -152,8 +152,8 @@ exports.goerliProposals = {
             "created": 6161622,
             "createdTimestamp": 1641601039,
             "expiration": 6161624,
-            "lastCall": 0,
-            "proposalHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "lastCall": 7164959,
+            "proposalHash": "0xbf35f67e89743d095cae3e2391c43e6fbddf27ff73e005821b669baa314ba8ae",
             "proposalId": "2",
             "quorum": "100000.0",
             "snapshotId": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932",
@@ -163,21 +163,55 @@ exports.goerliProposals = {
             "unlock": 6161623
         },
         {
-            "proposalId": "3",
-            "proposalHash": "0xbf35f67e89743d095cae3e2391c43e6fbddf27ff73e005821b669baa314ba8ae",
-            "unlock": 6184449,
-            "lastCall": 7164959,
+            "calldatas": [
+                "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea"
+            ],
             "created": 6164961,
             "createdTimestamp": 1641651129,
             "expiration": 6216929,
+            "lastCall": 7164959,
+            "proposalHash": "0xbf35f67e89743d095cae3e2391c43e6fbddf27ff73e005821b669baa314ba8ae",
+            "proposalId": "3",
+            "quorum": "1000000.0",
+            "snapshotId": "0x7c0bea7eb9340c9bbfcce5ba6b9ca3cbf46e214a7a8f113ab27472378a77aff5",
+            "targets": [
+                "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
+            ],
+            "unlock": 6184449
+        },
+        {
+            "proposalId": "4",
+            "proposalHash": "0x459a89007c89a1dc55693db5cc2ac0ef77faf73e6e7d821bedd89ba51cd5d4c4",
+            "unlock": 6300056,
+            "lastCall": 7280567,
+            "created": 6280568,
+            "createdTimestamp": 1643385417,
+            "expiration": 6332536,
             "quorum": "1000000.0",
             "targets": [
                 "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
             ],
             "calldatas": [
-                "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea"
+                "0x88b49b836772a5a4807b25bc0b6b5641b858d3363f93421880294675a8f519860f814c74"
             ],
-            "snapshotId": "0x7c0bea7eb9340c9bbfcce5ba6b9ca3cbf46e214a7a8f113ab27472378a77aff5"
+            "snapshotId": "0x45bdb2351a21da73162ba018a7b448231945b7754abec0ecdc66c3778e9e7720"
+        },
+        {
+            "proposalId": "5",
+            "proposalHash": "0x459a89007c89a1dc55693db5cc2ac0ef77faf73e6e7d821bedd89ba51cd5d4c4",
+            "unlock": 6300097,
+            "lastCall": 7280608,
+            "created": 6280609,
+            "createdTimestamp": 1643386032,
+            "expiration": 6332577,
+            "quorum": "1000000.0",
+            "targets": [
+                "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
+            ],
+            "calldatas": [
+                "0x88b49b836772a5a4807b25bc0b6b5641b858d3363f93421880294675a8f519860f814c74"
+            ],
+            "snapshotId": "0xc9899417b7b6e69ed856d74b6e7e40bcae4a0e2f90cf69547faf79548547d946"
         }
     ]
 };
