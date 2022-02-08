@@ -94,6 +94,12 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
         },
         index
       ): Promise<Proposal> => {
+        /* NOTE: 🚨 Forever Hack!
+         * Because of how the smart contracts work, proposals have their memory
+         * slots cleared once they've been executed. To prevent a loss of
+         * information in proposals.json, we never refetch on-chain proposals
+         * once they've been scraped the first time.
+         */
         const proposalId = proposalIdBN.toString();
         const existingProposal = proposalsJsonFile.proposals.find(
           (p) => p.proposalId === proposalId
@@ -101,6 +107,7 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
         if (existingProposal) {
           return existingProposal;
         }
+        /* End Hack */
 
         const createdBlock = await provider.getBlock(created.toNumber());
 
