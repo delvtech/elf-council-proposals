@@ -32,7 +32,8 @@ export interface Proposal {
   lastCall: number;
 
   /**
-   * minimum vote power to pass or reject a proposal in 1e18 format
+   * Minimum vote power to pass or reject a proposal. Note: this is a string
+   * because quorum can be too large a number for JS can handle.
    */
   quorum: string;
 

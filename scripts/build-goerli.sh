@@ -1,1 +1,1 @@
-npx hardhat run src/goerli.ts --network localhost --no-compile
+npx hardhat run src/goerli.ts --network goerli --no-compile
