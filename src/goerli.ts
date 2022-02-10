@@ -6,7 +6,7 @@ import hre, { ethers } from "hardhat";
 
 import { Proposal, ProposalsJson } from "src/types";
 
-import { SNAPSHOT_SPACE_ID } from "src/snapshot";
+import { SNAPSHOT_SPACE_ID_GOERLI, SNAPSHOT_SPACE_ID_MAINNET } from "src/snapshot";
 import { BigNumber, providers } from "ethers";
 
 const ALCHEMY_GOERLI_RPC_HOST =
@@ -142,7 +142,7 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
 
   const proposalsJson: ProposalsJson = {
     version: "0.0.0",
-    snapshotSpace: SNAPSHOT_SPACE_ID,
+    snapshotSpace: SNAPSHOT_SPACE_ID_GOERLI,
     proposals,
   };
 
