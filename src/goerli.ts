@@ -6,7 +6,7 @@ import hre, { ethers } from "hardhat";
 
 import { Proposal, ProposalsJson } from "src/types";
 
-import { SNAPSHOT_SPACE_ID } from "src/snapshot";
+import { SNAPSHOT_SPACE_ID_GOERLI } from "src/snapshot";
 import { BigNumber, providers } from "ethers";
 
 const ALCHEMY_GOERLI_RPC_HOST =
@@ -28,41 +28,26 @@ const coreVotingContract = CoreVoting__factory.connect(
  * Note: Sometimes the snapshot proposal ids are IPFS strings or hex strings 🤷
  */
 const snapshotIdsByProposalId: Record<string, string> = {
-  "0": "QmZSURBMfMh2qSTPSSjjaL2qPdqTMJsfpkvwxuKe72bH3y",
-  "1": "0x46b4c3dbdb4b8b84fe42660ac5b5a41b9026c472c22e8a8d4a76ba71bf3dd825",
-  "2": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932",
-  "3": "0x7c0bea7eb9340c9bbfcce5ba6b9ca3cbf46e214a7a8f113ab27472378a77aff5",
-  "4": "0x45bdb2351a21da73162ba018a7b448231945b7754abec0ecdc66c3778e9e7720",
-  "5": "0xc9899417b7b6e69ed856d74b6e7e40bcae4a0e2f90cf69547faf79548547d946",
+  "0": "0xa924bf8887e96f64eabf30a5026eb432bd03b6f055df017061a1e480cf477c9a",
+  "6": "0x91a739c399ba1b95d9b38013bf5c42b4cb83b56272b322d86587193859371f12",
+  "7": "0x71df6710e26894685f985ae303b4bd64eeaa080f3e91703dac6ae539f66b5dd0",
 };
 
 const targetsByProposalId: Record<string, string[]> = {
   "0": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
-  "1": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
-  "2": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
-  "3": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
-  "4": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
-  "5": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
+  "6": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
+  "7": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
 };
 
 const callDatasByProposalId: Record<string, string[]> = {
   "0": [
-    "0x88b49b8372416bb3ac6f3b340cccdbafbf60420e75bb439760acfe30a9078e52e60b6e79",
-  ],
-  "1": [
-    "0x88b49b8372416bb3ac6f3b340cccdbafbf60420e75bb439760acfe30a9078e52e60b6e79",
-  ],
-  "2": [
     "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea",
   ],
-  "3": [
+  "6": [
     "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea",
   ],
-  "4": [
-    "0x88b49b836772a5a4807b25bc0b6b5641b858d3363f93421880294675a8f519860f814c74",
-  ],
-  "5": [
-    "0x88b49b836772a5a4807b25bc0b6b5641b858d3363f93421880294675a8f519860f814c74",
+  "7": [
+    "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea",
   ],
 };
 
@@ -86,63 +71,72 @@ async function getProposals(outputPath: string): Promise<ProposalsJson> {
   );
 
   const proposals: Proposal[] = await Promise.all(
-    proposalCreatedEvents.map(
-      async (
-        {
+    proposalCreatedEvents
+      .filter(
+        ({
           args,
           args: { proposalId: proposalIdBN, created, execution, expiration },
-        },
-        index
-      ): Promise<Proposal> => {
-        /* NOTE: 🚨 Forever Hack!
-         * Because of how the smart contracts work, proposals have their memory
-         * slots cleared once they've been executed. To prevent a loss of
-         * information in proposals.json, we never refetch on-chain proposals
-         * once they've been scraped the first time.
-         */
-        const proposalId = proposalIdBN.toString();
-        const existingProposal = proposalsJsonFile.proposals.find(
-          (p) => p.proposalId === proposalId
-        );
-        if (existingProposal) {
-          return existingProposal;
+        }) => {
+          return !!snapshotIdsByProposalId[proposalIdBN.toString()];
         }
-        /* End Hack */
+      )
+      .map(
+        async (
+          {
+            args,
+            args: { proposalId: proposalIdBN, created, execution, expiration },
+          },
+          index
+        ): Promise<Proposal> => {
+          /* NOTE: 🚨 Forever Hack!
+           * Because of how the smart contracts work, proposals have their memory
+           * slots cleared once they've been executed. To prevent a loss of
+           * information in proposals.json, we never refetch on-chain proposals
+           * once they've been scraped the first time.
+           */
+          const proposalId = proposalIdBN.toString();
+          const existingProposal = proposalsJsonFile.proposals.find(
+            (p) => p.proposalId === proposalId
+          );
+          if (existingProposal) {
+            return existingProposal;
+          }
+          /* End Hack */
 
-        const createdBlock = await provider.getBlock(created.toNumber());
+          const createdBlock = await provider.getBlock(created.toNumber());
 
-        const { proposalHash, lastCall, quorum } =
-          await coreVotingContract.functions.proposals(proposalIdBN);
+          const { proposalHash, lastCall, quorum } =
+            await coreVotingContract.functions.proposals(proposalIdBN);
 
-        const snapshotId =
-          snapshotIdsByProposalId[proposalId] ||
-          // Temporary: default to the first one if more proposals exist
-          // on-chain than are in the snapshot space,
-          snapshotIdsByProposalId[0];
+          const snapshotId =
+            snapshotIdsByProposalId[proposalId] ||
+            // Temporary: default to the first one if more proposals exist
+            // on-chain than are in the snapshot space,
+            snapshotIdsByProposalId[0];
 
-        const targets = targetsByProposalId[proposalId];
-        const calldatas = callDatasByProposalId[proposalId];
+          const targets = targetsByProposalId[proposalId];
+          const calldatas = callDatasByProposalId[proposalId];
 
-        return {
-          proposalId,
-          proposalHash: proposalHash,
-          unlock: execution.toNumber(),
-          lastCall: lastCall.toNumber(),
-          created: created.toNumber(),
-          createdTimestamp: createdBlock.timestamp,
-          expiration: expiration.toNumber(),
-          quorum: formatEther(quorum),
-          targets,
-          calldatas,
-          snapshotId: snapshotId,
-        };
-      }
-    )
+          return {
+            proposalId,
+            proposalHash: proposalHash,
+            unlock: execution.toNumber(),
+            lastCall: lastCall.toNumber(),
+            created: created.toNumber(),
+            createdTimestamp: createdBlock.timestamp,
+            expiration: expiration.toNumber(),
+            quorum: formatEther(quorum),
+            targets,
+            calldatas,
+            snapshotId: snapshotId,
+          };
+        }
+      )
   );
 
   const proposalsJson: ProposalsJson = {
     version: "0.0.0",
-    snapshotSpace: SNAPSHOT_SPACE_ID,
+    snapshotSpace: SNAPSHOT_SPACE_ID_GOERLI,
     proposals,
   };
 
