@@ -22,19 +22,28 @@ const coreVotingContract = CoreVoting__factory.connect(
  *
  * Note: Sometimes the snapshot proposal ids are IPFS strings or hex strings 🤷
  */
-const snapshotIdsByProposalId: Record<string, string> = {
+const snapshotIdsByProposalId: Record<
+  /* onchain proposal id */ string,
+  /* snapshot proposal id */ string
+> = {
   "0": "0xa924bf8887e96f64eabf30a5026eb432bd03b6f055df017061a1e480cf477c9a",
   "1": "0x91a739c399ba1b95d9b38013bf5c42b4cb83b56272b322d86587193859371f12",
   "2": "0x71df6710e26894685f985ae303b4bd64eeaa080f3e91703dac6ae539f66b5dd0",
 };
 
-const targetsByProposalId: Record<string, string[]> = {
+const targetsByProposalId: Record<
+  /* onchain proposal id */ string,
+  /* targets id */ string[]
+> = {
   "0": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
   "1": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
   "2": ["0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"],
 };
 
-const callDatasByProposalId: Record<string, string[]> = {
+const callDatasByProposalId: Record<
+  /* onchain proposal id */ string,
+  /* calldatas id */ string[]
+> = {
   "0": [
     "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea",
   ],
