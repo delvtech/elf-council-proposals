@@ -14,6 +14,16 @@ export interface Proposal {
    * The block number the proposal was create at
    */
   created: number;
+
+  /**
+   * Human-readable title of the proposal.
+   */
+   title: string;
+
+   /**
+    * Human-readable description of the proposal.
+    */
+   description: string;
   /**
    * Timestamp in seconds of the block the proposal was created in
    */
