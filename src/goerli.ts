@@ -10,7 +10,7 @@ import { getProposals } from "src/getProposals";
 import { SNAPSHOT_SPACE_ID_GOERLI } from "src/snapshot";
 
 const ALCHEMY_GOERLI_RPC_HOST =
-  "https://eth-goerli.alchemyapi.io/v2/fBuOKVPGvseZZb0h8HyPIDqtKC7nslig";
+  `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_GOERLI_API_KEY}`;
 
 const provider = new providers.JsonRpcProvider(ALCHEMY_GOERLI_RPC_HOST);
 
