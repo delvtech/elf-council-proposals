@@ -15,11 +15,69 @@
  * 🚨🚨🚨 THIS FILE IS AUTO-GENERATED. DO NOT EDIT MANUALLY. 🚨🚨🚨
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.goerliProposals = exports.testnetProposals = void 0;
+exports.mainnetProposals = exports.goerliProposals = exports.testnetProposals = void 0;
 exports.testnetProposals = {
     "version": "0.0.0",
     "snapshotSpace": "element-finance-goerli.eth",
-    "proposals": []
+    "proposals": [
+        {
+            "proposalId": "0",
+            "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
+            "description": "Should Element Finance add a Dogecoin term?\n\nTargets: [0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4]\nCallDatas: [0x88b49b8372416bb3ac6f3b340cccdbafbf60420e75bb439760acfe30a9078e52e60b6e79]",
+            "title": "EIP-002 - Add a Dogecoin Term",
+            "unlock": 11853414,
+            "lastCall": 11911874,
+            "created": 11853413,
+            "createdTimestamp": 1613286482,
+            "expiration": 11853415,
+            "quorum": "50.0",
+            "targets": [
+                "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
+            ],
+            "calldatas": [
+                "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea"
+            ],
+            "snapshotId": "0xa924bf8887e96f64eabf30a5026eb432bd03b6f055df017061a1e480cf477c9a"
+        },
+        {
+            "proposalId": "1",
+            "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
+            "description": "I know why you're here, Neo. I know what you've been doing... why you hardly sleep, why you live alone, and why night after night, you sit by your computer. You're looking for him. I know because I was once looking for the same thing. And when he found me, he told me I wasn't really looking for him. I was looking for an answer. It's the question that drives us, Neo. It's the question that brought you here. You know the question, just as I did. What is the Matrix?\n\nTargets: [0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4]\nCallDatas: [0x88b49b8372416bb3ac6f3b340cccdbafbf60420e75bb439760acfe30a9078e52e60b6e79]\n",
+            "title": "EIP-000 - The Choice is an Illusion ",
+            "unlock": 11853419,
+            "lastCall": 11911879,
+            "created": 11853418,
+            "createdTimestamp": 1613286488,
+            "expiration": 11853420,
+            "quorum": "50.0",
+            "targets": [
+                "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
+            ],
+            "calldatas": [
+                "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea"
+            ],
+            "snapshotId": "0x91a739c399ba1b95d9b38013bf5c42b4cb83b56272b322d86587193859371f12"
+        },
+        {
+            "proposalId": "2",
+            "proposalHash": "0x403e9f45397eef3a39f1933f3b15ec86f5f18c7325126f876d95f6d70b4a245e",
+            "description": "To be, or not to be: that is the question:\nWhether 'tis nobler in the mind to suffer\nThe slings and arrows of outrageous fortune,\nOr to take arms against a sea of troubles,\nAnd by opposing end them? To die: to sleep;\nNo more; and by a sleep to say we end\nThe heart-ache and the thousand natural shocks\nThat flesh is heir to, 'tis a consummation\nDevoutly to be wish'd. To die, to sleep;\nTo sleep: perchance to dream: ay, there's the rub;\nFor in that sleep of death what dreams may come\nWhen we have shuffled off this mortal coil,\nMust give us pause: there's the respect\nThat makes calamity of so long life;\nFor who would bear the whips and scorns of time,\nThe oppressor's wrong, the proud man's contumely,\nThe pangs of despised love, the law's delay,\nThe insolence of office and the spurns\nThat patient merit of the unworthy takes,\nWhen he himself might his quietus make\nWith a bare bodkin? who would fardels bear,\nTo grunt and sweat under a weary life,\nBut that the dread of something after death,\nThe undiscover'd country from whose bourn\nNo traveller returns, puzzles the will\nAnd makes us rather bear those ills we have\nThan fly to others that we know not of?\nThus conscience does make cowards of us all;\nAnd thus the native hue of resolution\nIs sicklied o'er with the pale cast of thought,\nAnd enterprises of great pith and moment\nWith this regard their currents turn awry,\nAnd lose the name of action.--Soft you now!\nThe fair Ophelia! Nymph, in thy orisons\nBe all my sins remember'd!\n\nTargets: [0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4]\nCallDatas: [0x88b49b8372416bb3ac6f3b340cccdbafbf60420e75bb439760acfe30a9078e52e60b6e79]\n",
+            "title": "EIP-001 - To be or not to be",
+            "unlock": 11853424,
+            "lastCall": 11911884,
+            "created": 11853423,
+            "createdTimestamp": 1613286494,
+            "expiration": 11853425,
+            "quorum": "50.0",
+            "targets": [
+                "0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4"
+            ],
+            "calldatas": [
+                "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea"
+            ],
+            "snapshotId": "0x71df6710e26894685f985ae303b4bd64eeaa080f3e91703dac6ae539f66b5dd0"
+        }
+    ]
 };
 exports.goerliProposals = {
     "version": "0.0.0",
@@ -83,4 +141,9 @@ exports.goerliProposals = {
             "snapshotId": "0x71df6710e26894685f985ae303b4bd64eeaa080f3e91703dac6ae539f66b5dd0"
         }
     ]
+};
+exports.mainnetProposals = {
+    "version": "0.0.0",
+    "snapshotSpace": "element-finance.eth",
+    "proposals": []
 };

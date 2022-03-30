@@ -2,6 +2,6 @@
 *node_modules*
 compiled
 src/*.addresses.json
-elf.env
+.env
 node_modules
 src/index.ts
