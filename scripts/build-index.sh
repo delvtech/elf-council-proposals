@@ -1,5 +1,6 @@
 TESTNET_PROPOSALS_JSON=`cat dist/testnet.proposals.json`
 GOERLI_PROPOSALS_JSON=`cat src/proposals/goerli.proposals.json`
+MAINNET_PROPOSALS_JSON=`cat src/proposals/mainnet.proposals.json`
 
 echo "
 /**
@@ -22,6 +23,7 @@ import { ProposalsJson } from './types';
 
 export const testnetProposals: ProposalsJson = $TESTNET_PROPOSALS_JSON;
 export const goerliProposals: ProposalsJson = $GOERLI_PROPOSALS_JSON;
+export const mainnetProposals: ProposalsJson = $MAINNET_PROPOSALS_JSON;
 " > src/index.ts
 
 tsc --project tsconfig.json
