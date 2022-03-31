@@ -1,6 +1,6 @@
 {
   "name": "@elementfi/elf-council-proposals",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "dependencies": {
     "@elementfi/elf-council-tokenlist": "^1.0.2",
