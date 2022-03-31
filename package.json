@@ -5,8 +5,6 @@
   "dependencies": {
     "@types/lodash.uniq": "^4.5.6",
     "@types/lodash.zip": "^4.2.6",
-    "elf-council-tokenlist": "git+https://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:x-oauth-basic@github.com/element-fi/elf-council-tokenlist.git",
-    "elf-council-typechain": "git+https://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:x-oauth-basic@github.com/element-fi/elf-council-typechain.git",
     "graphql": "^16.3.0",
     "graphql-request": "^4.0.0",
     "lodash.uniq": "^4.5.0",
