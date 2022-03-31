@@ -1,5 +1,5 @@
-import { goerliAddressList } from "elf-council-tokenlist";
-import { CoreVoting__factory } from "elf-council-typechain";
+import { goerliAddressList } from "@elementfi/elf-council-tokenlist";
+import { CoreVoting__factory } from "@elementfi/elf-council-typechain";
 import fs from "fs";
 import hre, { ethers } from "hardhat";
 
