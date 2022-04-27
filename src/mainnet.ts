@@ -56,7 +56,7 @@ const gscCallDatasByProposalId: Record<string, string[]> = {};
       currentProposalsJson.proposals.map((proposal) => proposal.proposalId)
     );
 
-    const gscNewProposals = await getProposals(
+    const newGscProposals = await getProposals(
       provider,
       gscCoreVotingContract,
       gscSnapshotIdsByProposalId,
@@ -81,14 +81,14 @@ const gscCallDatasByProposalId: Record<string, string[]> = {};
     const gscProposalsJson: ProposalsJson = {
       version: "0.0.0",
       snapshotSpace: SNAPSHOT_GSC_SPACE_ID_MAINNET,
-      proposals: [...currentGscProposalsJson.proposals, ...newProposals],
+      proposals: [...currentGscProposalsJson.proposals, ...newGscProposals],
     };
     const gscProposalsJsonString = JSON.stringify(gscProposalsJson, null, 2);
-    console.log(proposalsJsonString);
+    console.log(gscProposalsJsonString);
 
     fs.writeFileSync(
       "src/proposals/mainnet-gsc.proposals.json",
-      proposalsJsonString
+      gscProposalsJsonString
     );
     process.exit(0);
   } catch (error) {
