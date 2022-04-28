@@ -4,8 +4,7 @@ const SNAPSHOT_GRAPHQL_ENDPOINT = "https://hub.snapshot.org/graphql";
 
 export const SNAPSHOT_SPACE_ID_MAINNET = "elfi.eth";
 
-// TODO: get real name
-export const SNAPSHOT_GSC_SPACE_ID_MAINNET = "elfi-gsc.eth";
+export const SNAPSHOT_GSC_SPACE_ID_MAINNET = "elfi.eth";
 export const SNAPSHOT_SPACE_ID_GOERLI = "element-finance-goerli.eth";
 
 export interface SnapshotProposal {
