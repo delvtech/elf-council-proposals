@@ -2,8 +2,9 @@ import { gql, request } from "graphql-request";
 
 const SNAPSHOT_GRAPHQL_ENDPOINT = "https://hub.snapshot.org/graphql";
 
+// mainnet and gsc mainnet snapshot spaces currently share the same one.  GSC may change in the
+// future so we declare different consts
 export const SNAPSHOT_SPACE_ID_MAINNET = "elfi.eth";
-
 export const SNAPSHOT_GSC_SPACE_ID_MAINNET = "elfi.eth";
 export const SNAPSHOT_SPACE_ID_GOERLI = "element-finance-goerli.eth";
 

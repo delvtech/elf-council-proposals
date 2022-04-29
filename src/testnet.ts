@@ -22,7 +22,7 @@ const gscCoreVotingContract = CoreVoting__factory.connect(
 );
 
 /**
- * A mapping of localhost CoreVoting Proposal IDs -> random Snapshot proposal
+ * A mapping of localhost GSC CoreVoting Proposal IDs -> random Snapshot proposal
  * ids from Element Finance.  This is how we show titles/descriptions for
  * testnet proposals in dev.
  *
