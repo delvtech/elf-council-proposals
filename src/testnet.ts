@@ -1,34 +1,44 @@
 import { AddressesJsonFile } from "@elementfi/elf-council-tokenlist";
 import { CoreVoting__factory } from "@elementfi/elf-council-typechain";
-import { formatEther } from "ethers/lib/utils";
 import fs from "fs";
 import hre from "hardhat";
 
-import { Proposal, ProposalsJson } from "src/types";
+import { ProposalsJson } from "src/types";
 
 import { SNAPSHOT_SPACE_ID_GOERLI } from "src/snapshot";
 import { getProposals } from "src/getProposals";
 
 const provider = hre.ethers.provider;
 const addressesJson: AddressesJsonFile = require(`src/addresses/testnet.addresses.json`);
+
 const coreVotingContract = CoreVoting__factory.connect(
   addressesJson.addresses.coreVoting,
   provider
 );
 
+const gscCoreVotingContract = CoreVoting__factory.connect(
+  addressesJson.addresses.gscCoreVoting,
+  provider
+);
+
 /**
- * A mapping of localhost CoreVoting Proposal IDs -> random Snapshot proposal
+ * A mapping of localhost GSC CoreVoting Proposal IDs -> random Snapshot proposal
  * ids from Element Finance.  This is how we show titles/descriptions for
  * testnet proposals in dev.
  *
  * Note: Sometimes the snapshot proposal ids are IPFS strings or hex strings 🤷
  */
 const snapshotIdsByProposalId: Record<string, string> = {
-  "0": "QmZSURBMfMh2qSTPSSjjaL2qPdqTMJsfpkvwxuKe72bH3y",
-  "1": "0x46b4c3dbdb4b8b84fe42660ac5b5a41b9026c472c22e8a8d4a76ba71bf3dd825",
-  "2": "0x0527654d3f94d4798d34ac8ec574da9203f7efe4b4a7a87092fa316abde25932",
-  "3": "0x7c0bea7eb9340c9bbfcce5ba6b9ca3cbf46e214a7a8f113ab27472378a77aff5",
-  "4": "0x45bdb2351a21da73162ba018a7b448231945b7754abec0ecdc66c3778e9e7720",
+  // EIP-000
+  "0": "0x91a739c399ba1b95d9b38013bf5c42b4cb83b56272b322d86587193859371f12",
+  // EFP-001
+  "1": "0xbe329d38a1465fa6c6a4bc8aa6c39346818b2a5600414fb44f85230145120611",
+  // Example Proposal
+  "2": "0x5d556f0edb608697a426bdf0951e63139db7f8c7d5a7761b1fb5b5a969a69343",
+  // EIP-001
+  "3": "0x71df6710e26894685f985ae303b4bd64eeaa080f3e91703dac6ae539f66b5dd0",
+  // EIP-002
+  "4": "0xa924bf8887e96f64eabf30a5026eb432bd03b6f055df017061a1e480cf477c9a",
 };
 
 const targetsByProposalId: Record<string, string[]> = {
@@ -57,14 +67,55 @@ const callDatasByProposalId: Record<string, string[]> = {
   ],
 };
 
+/**
+ * A mapping of localhost CoreVoting Proposal IDs -> random Snapshot proposal
+ * ids from Element Finance.  This is how we show titles/descriptions for
+ * testnet proposals in dev.
+ *
+ * Note: Sometimes the snapshot proposal ids are IPFS strings or hex strings 🤷
+ */
+const gscSnapshotIdsByProposalId: Record<string, string> = {
+  "0": "0x91a739c399ba1b95d9b38013bf5c42b4cb83b56272b322d86587193859371f12",
+  "1": "0x71df6710e26894685f985ae303b4bd64eeaa080f3e91703dac6ae539f66b5dd0",
+  "2": "0xa924bf8887e96f64eabf30a5026eb432bd03b6f055df017061a1e480cf477c9a",
+};
+
+const gscTargetsByProposalId: Record<string, string[]> = {
+  "0": ["0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"],
+  "1": ["0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"],
+  "2": ["0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"],
+};
+
+const gscCallDatasByProposalId: Record<string, string[]> = {
+  "0": [
+    "0x3eba045b000000000000000000000000000000000000000000000005f68e8131ecf80000",
+  ],
+  "1": [
+    "0x3eba045b000000000000000000000000000000000000000000000005f68e8131ecf80000",
+  ],
+  "2": [
+    "0x3eba045b000000000000000000000000000000000000000000000005f68e8131ecf80000",
+  ],
+};
+
 (async function () {
   try {
+    // NOTE: this WILL break if the snapshot id is not found
     const newProposals = await getProposals(
       provider,
       coreVotingContract,
       snapshotIdsByProposalId,
       targetsByProposalId,
       callDatasByProposalId
+    );
+
+    // NOTE: this WILL break if the snapshot id is not found
+    const newGscProposals = await getProposals(
+      provider,
+      gscCoreVotingContract,
+      gscSnapshotIdsByProposalId,
+      gscTargetsByProposalId,
+      gscCallDatasByProposalId
     );
 
     const proposalsJson: ProposalsJson = {
@@ -75,8 +126,27 @@ const callDatasByProposalId: Record<string, string[]> = {
     };
     const proposalsJsonString = JSON.stringify(proposalsJson, null, 2);
     console.log(proposalsJsonString);
+    console.log("");
 
-    fs.writeFileSync("dist/testnet.proposals.json", proposalsJsonString);
+    fs.writeFileSync(
+      "src/proposals/testnet.proposals.json",
+      proposalsJsonString
+    );
+
+    const gscProposalsJson: ProposalsJson = {
+      version: "0.0.0",
+      // hardhat should use the goerli snapshot
+      snapshotSpace: SNAPSHOT_SPACE_ID_GOERLI,
+      proposals: newGscProposals,
+    };
+    const gscProposalsJsonString = JSON.stringify(gscProposalsJson, null, 2);
+    console.log(gscProposalsJsonString);
+
+    fs.writeFileSync(
+      "src/proposals/testnet-gsc.proposals.json",
+      gscProposalsJsonString
+    );
+
     process.exit(0);
   } catch (error) {
     console.error(error);

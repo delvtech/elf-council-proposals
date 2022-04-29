@@ -1,6 +1,8 @@
-TESTNET_PROPOSALS_JSON=`cat dist/testnet.proposals.json`
+TESTNET_PROPOSALS_JSON=`cat src/proposals/testnet.proposals.json`
+TESTNET_GSC_PROPOSALS_JSON=`cat src/proposals/testnet-gsc.proposals.json`
 GOERLI_PROPOSALS_JSON=`cat src/proposals/goerli.proposals.json`
 MAINNET_PROPOSALS_JSON=`cat src/proposals/mainnet.proposals.json`
+MAINNET_GSC_PROPOSALS_JSON=`cat src/proposals/mainnet-gsc.proposals.json`
 
 echo "
 /**
@@ -22,8 +24,10 @@ echo "
 import { ProposalsJson } from './types';
 
 export const testnetProposals: ProposalsJson = $TESTNET_PROPOSALS_JSON;
+export const testnetGscProposals: ProposalsJson = $TESTNET_GSC_PROPOSALS_JSON;
 export const goerliProposals: ProposalsJson = $GOERLI_PROPOSALS_JSON;
 export const mainnetProposals: ProposalsJson = $MAINNET_PROPOSALS_JSON;
+export const mainnetGscProposals: ProposalsJson = $MAINNET_GSC_PROPOSALS_JSON;
 " > src/index.ts
 
 tsc --project tsconfig.json

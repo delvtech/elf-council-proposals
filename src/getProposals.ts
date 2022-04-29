@@ -23,22 +23,20 @@ export async function getProposals(
    * proposal's state will exist forever. To handle this, once you've scraped a
    * proposal, you can add it to the list of proposals to skip for future runs.
    */
-  const newOnChainProposals = onChainProposalCreatedEvents.filter((events) => {
-    const proposalId = events.args.proposalId.toString();
+  const newOnChainProposals = onChainProposalCreatedEvents.filter((event) => {
+    const proposalId = event.args.proposalId.toString();
     const isNewProposal = !proposalIdsToSkip.find((p) => p === proposalId);
     const hasSnapshotMatch = !!snapshotIdsByProposalId[proposalId];
     return isNewProposal && hasSnapshotMatch;
   });
 
   const newProposalPromises = newOnChainProposals.map(
-    async ({
-      args: { proposalId: proposalIdBN, created, execution, expiration },
-    }): Promise<Proposal> => {
+    async ({ args: { proposalId: proposalIdBN } }): Promise<Proposal> => {
+      const { proposalHash, lastCall, quorum, unlock, created, expiration } =
+        await coreVotingContract.functions.proposals(proposalIdBN);
+
       const createdBlock = await provider.getBlock(created.toNumber());
       const proposalId = proposalIdBN.toString();
-
-      const { proposalHash, lastCall, quorum } =
-        await coreVotingContract.functions.proposals(proposalIdBN);
 
       const snapshotId =
         snapshotIdsByProposalId[proposalId] ||
@@ -46,6 +44,8 @@ export async function getProposals(
         // on-chain than are in the snapshot space,
         snapshotIdsByProposalId[0];
 
+      // NOTE: this WILL break if the snapshot id is not found.  this is good though, we don't want
+      // to add it if the snapshot id is wrong
       const { body: description, title } =
         await fetchSnapshotProposalTitleAndBody(snapshotId);
 
@@ -57,7 +57,7 @@ export async function getProposals(
         description,
         title,
         proposalHash: proposalHash,
-        unlock: execution.toNumber(),
+        unlock: unlock.toNumber(),
         lastCall: lastCall.toNumber(),
         created: created.toNumber(),
         createdTimestamp: createdBlock.timestamp,
