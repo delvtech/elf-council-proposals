@@ -45,7 +45,7 @@
   },
   "scripts": {
     "build-testnet": "bash scripts/build-testnet.sh && npm run _build-index && npm run _copy-files",
-    "build-goerli": "bash scripts/build-goerli.sh",
+    "build-goerli": "bash scripts/build-goerli.sh && npm run _build-index && npm run _copy-files",
     "build-mainnet": "bash scripts/build-mainnet.sh",
     "build": "npm run build-goerli && npm run build-mainnet && npm run build-testnet && npm run _build-index && npm run _copy-files",
     "_build-index": "bash scripts/build-index.sh",

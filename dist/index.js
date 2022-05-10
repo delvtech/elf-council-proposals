@@ -15,7 +15,7 @@
  * 🚨🚨🚨 THIS FILE IS AUTO-GENERATED. DO NOT EDIT MANUALLY. 🚨🚨🚨
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mainnetGscProposals = exports.mainnetProposals = exports.goerliProposals = exports.testnetGscProposals = exports.testnetProposals = void 0;
+exports.mainnetGscProposals = exports.mainnetProposals = exports.goerliGscProposals = exports.goerliProposals = exports.testnetGscProposals = exports.testnetProposals = void 0;
 exports.testnetProposals = {
     "version": "0.0.0",
     "snapshotSpace": "element-finance-goerli.eth",
@@ -240,6 +240,31 @@ exports.goerliProposals = {
                 "0x88b49b8364ec53acdd6f74efcba0de586952c40e23aa87d547d57fabb1ee21203b7b09ea"
             ],
             "snapshotId": "0x71df6710e26894685f985ae303b4bd64eeaa080f3e91703dac6ae539f66b5dd0"
+        }
+    ]
+};
+exports.goerliGscProposals = {
+    "version": "0.0.0",
+    "snapshotSpace": "element-finance-goerli.eth",
+    "proposals": [
+        {
+            "proposalId": "0",
+            "description": "Should Element Finance add a Dogecoin term?\n\nTargets: [0x36687bdD319a78AB4b4347f3A7459Da235AFc4f4]\nCallDatas: [0x88b49b8372416bb3ac6f3b340cccdbafbf60420e75bb439760acfe30a9078e52e60b6e79]",
+            "title": "EIP-002 - Add a Dogecoin Term",
+            "proposalHash": "0xdb42f1c110c3321b1280f5c39d2d50470c53dd29f437915cbbd252c51686ec38",
+            "unlock": 6881872,
+            "lastCall": 6920846,
+            "created": 6862383,
+            "createdTimestamp": 1652220477,
+            "expiration": 6914352,
+            "quorum": "0.000000000000000001",
+            "targets": [
+                "0x0A575bFA79454112c37B9Af2a6362c9c68f7d2e3"
+            ],
+            "calldatas": [
+                "0x3eba045b000000000000000000000000000000000000000000000005f68e8131ecf80000"
+            ],
+            "snapshotId": "0xa924bf8887e96f64eabf30a5026eb432bd03b6f055df017061a1e480cf477c9a"
         }
     ]
 };
