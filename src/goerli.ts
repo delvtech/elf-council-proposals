@@ -54,11 +54,17 @@ const callDatasByProposalId: Record<string, string[]> = {
   ],
 };
 
-const gscSnapshotIdsByProposalId: Record<string, string> = {};
+const gscSnapshotIdsByProposalId: Record<string, string> = {
+  "0": "0xa924bf8887e96f64eabf30a5026eb432bd03b6f055df017061a1e480cf477c9a",
+};
 
-const gscTargetsByProposalId: Record<string, string[]> = {};
+const gscTargetsByProposalId: Record<string, string[]> = {
+  "0": [ '0x0A575bFA79454112c37B9Af2a6362c9c68f7d2e3' ],
+};
 
-const gscCallDatasByProposalId: Record<string, string[]> = {};
+const gscCallDatasByProposalId: Record<string, string[]> = {
+  "0": ["0x3eba045b000000000000000000000000000000000000000000000005f68e8131ecf80000"],
+};
 
 (async function () {
   try {
@@ -105,7 +111,7 @@ const gscCallDatasByProposalId: Record<string, string[]> = {};
     const gscProposalsJsonString = JSON.stringify(gscProposalsJson, null, 2);
 
     fs.writeFileSync(
-      "src/proposals/mainnet-gsc.proposals.json",
+      "src/proposals/goerli-gsc.proposals.json",
       gscProposalsJsonString
     );
     process.exit(0);
