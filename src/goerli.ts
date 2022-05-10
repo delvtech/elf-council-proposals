@@ -7,15 +7,22 @@ import { ProposalsJson } from "src/types";
 
 import { providers } from "ethers";
 import { getProposals } from "src/getProposals";
-import { SNAPSHOT_SPACE_ID_GOERLI } from "src/snapshot";
+import { SNAPSHOT_GSC_SPACE_ID_GOERLI, SNAPSHOT_SPACE_ID_GOERLI } from "src/snapshot";
 
 const ALCHEMY_GOERLI_RPC_HOST = `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_GOERLI_API_KEY}`;
 
 const provider = new providers.JsonRpcProvider(ALCHEMY_GOERLI_RPC_HOST);
 
 const currentProposalsJson: ProposalsJson = require(`src/proposals/goerli.proposals.json`);
+const currentGscProposalsJson: ProposalsJson = require(`src/proposals/goerli-gsc.proposals.json`);
+
 const coreVotingContract = CoreVoting__factory.connect(
   goerliAddressList.addresses.coreVoting,
+  provider
+);
+
+const gscCoreVotingContract = CoreVoting__factory.connect(
+  goerliAddressList.addresses.gscCoreVoting,
   provider
 );
 
@@ -47,8 +54,15 @@ const callDatasByProposalId: Record<string, string[]> = {
   ],
 };
 
+const gscSnapshotIdsByProposalId: Record<string, string> = {};
+
+const gscTargetsByProposalId: Record<string, string[]> = {};
+
+const gscCallDatasByProposalId: Record<string, string[]> = {};
+
 (async function () {
   try {
+    // CORE PROPOSALS
     const newProposals = await getProposals(
       provider,
       coreVotingContract,
@@ -63,12 +77,36 @@ const callDatasByProposalId: Record<string, string[]> = {
       snapshotSpace: SNAPSHOT_SPACE_ID_GOERLI,
       proposals: [...currentProposalsJson.proposals, ...newProposals],
     };
+
     const proposalsJsonString = JSON.stringify(proposalsJson, null, 2);
-    console.log(proposalsJsonString);
 
     fs.writeFileSync(
       "src/proposals/goerli.proposals.json",
       proposalsJsonString
+    );
+
+
+    // GSC PROPOSALS
+    const newGscProposals = await getProposals(
+      provider,
+      gscCoreVotingContract,
+      gscSnapshotIdsByProposalId,
+      gscTargetsByProposalId,
+      gscCallDatasByProposalId,
+      currentGscProposalsJson.proposals.map((proposal) => proposal.proposalId)
+    );
+
+    const gscProposalsJson: ProposalsJson = {
+      version: "0.0.0",
+      snapshotSpace: SNAPSHOT_GSC_SPACE_ID_GOERLI,
+      proposals: [...currentGscProposalsJson.proposals, ...newGscProposals],
+    };
+
+    const gscProposalsJsonString = JSON.stringify(gscProposalsJson, null, 2);
+
+    fs.writeFileSync(
+      "src/proposals/mainnet-gsc.proposals.json",
+      gscProposalsJsonString
     );
     process.exit(0);
   } catch (error) {
